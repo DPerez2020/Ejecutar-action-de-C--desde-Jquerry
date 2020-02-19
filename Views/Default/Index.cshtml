@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+
+}
+
+<!--
+    
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+-->
+<!--Para cargarlo en un input-->
+<input type="text" id="Content"/>
+<!--Boton que llama al metodo de jquerry-->
+<input type="button" name="name" value="try" onclick="DepListQuery()" />
+<script>
+    function DepListQuery() {
+
+        $.ajax({
+            //Metodo de peticion
+            type: 'POST',
+            //Se especifica el action y el controlador
+            url: '@Url.Action("GetData","Default")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            //En caso de que todo salga bien ejecuta esto y recibe como parametro el resultado que se envia desde el action
+            success: function (response) {
+                //Se obtiene el textbox y se le carga la data
+                var textbox = document.getElementById('Content');
+                textbox.value = response.nombre;
+                alert(response.nombre);
+            },
+            failure: function (response) {
+                alert(response);
+            }
+        });
+    }
+</script>
